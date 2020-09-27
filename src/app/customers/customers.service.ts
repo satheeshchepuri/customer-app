@@ -26,12 +26,11 @@ export class CustomersService implements OnDestroy {
 
 
   constructor(private http: HttpClient) { }
-  hosturl = window.location.host;
-  baseUrl = `http://${this.hosturl}/customer/findAll`;
+  hosturl = 'http://custom-service-lb-1070377384.us-east-1.elb.amazonaws.com/customer';
   ngOnDestroy() { console.log('CustomersService instance destroyed.'); }
 
   getCustomers(): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(this.baseUrl);
+    return this.http.get<ApiResponse>(`${this.hosturl}/findAll`);
   }
 
   getCustomer(id: number): Observable<Customer> {
